@@ -13,13 +13,11 @@ export const IngredientDetails: FC = () => {
   );
 
   useEffect(() => {
-    // Если ингредиенты не загружены, запросить их
     if (!items.length) {
       dispatch(fetchIngredients());
     }
   }, [dispatch, items.length]);
 
-  // Пока идёт загрузка или нет данных — показать прелоадер
   if (loading || !items.length) {
     return <Preloader />;
   }
