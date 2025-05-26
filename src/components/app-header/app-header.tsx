@@ -7,7 +7,6 @@ export const AppHeader: FC = () => {
   const dispatch = useDispatch();
   const { user, loading } = useSelector((state: RootState) => state.user);
 
-  // При монтировании проверяем наличие токена и подтягиваем профиль
   useEffect(() => {
     const hasToken = document.cookie
       .split('; ')

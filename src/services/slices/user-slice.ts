@@ -66,7 +66,6 @@ export const logoutUser = createAsyncThunk<void, void, { rejectValue: string }>(
   async (_, { rejectWithValue }) => {
     try {
       await logoutApi();
-      // Очистим токены
       localStorage.removeItem('refreshToken');
       document.cookie = 'accessToken=; path=/; max-age=0';
     } catch (err: any) {
