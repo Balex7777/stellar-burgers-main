@@ -11,6 +11,7 @@ import {
   clearCurrentOrder
 } from '../../services/slices/orders-slice';
 import { useNavigate } from 'react-router-dom';
+import { clearConstructor } from '../../services/slices/constructor-slice';
 
 export const BurgerConstructor: FC = () => {
   const dispatch = useDispatch();
@@ -31,7 +32,6 @@ export const BurgerConstructor: FC = () => {
       return;
     }
     const ids = constructorItems.ingredients.map((item) => item._id);
-    // в POST отправляем id булок дважды + остальные ингредиенты
     const ingredientIds = [
       constructorItems.bun._id,
       ...ids,
@@ -42,6 +42,7 @@ export const BurgerConstructor: FC = () => {
 
   const closeOrderModal = () => {
     dispatch(clearCurrentOrder());
+    dispatch(clearConstructor());
   };
 
   const price = useMemo(
