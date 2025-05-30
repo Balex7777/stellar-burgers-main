@@ -1,5 +1,5 @@
 /// <reference types="cypress" />
-import { deleteCookie, setCookie } from './../../src/utils/cookie';
+import { setCookie } from './../../src/utils/cookie';
 
 describe('Создание заказа', () => {
   beforeEach(() => {
@@ -24,18 +24,14 @@ describe('Создание заказа', () => {
       'createOrder'
     );
 
-    cy.visit('/', {
-      onBeforeLoad(win) {
-        win.localStorage.setItem('accessToken', 'Bearer mockAccessToken');
-        win.localStorage.setItem('refreshToken', 'mockRefreshToken');
-      }
-    });
-    cy.wait('@getIngredients');
+    cy.visit('/');
 
-    cy.window().then((win) => {
-      win.localStorage.setItem('accessToken', 'Bearer mockAccessToken');
-      win.localStorage.setItem('refreshToken', 'mockRefreshToken');
-    });
+    cy.wait('@getIngredients');
+  });
+
+  afterEach(() => {
+    cy.clearLocalStorage();
+    cy.clearCookies();
   });
 
   it('формирует заказ, отправляет, показывает модалку с номером и очищает конструктор', () => {
